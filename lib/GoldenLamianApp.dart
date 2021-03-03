@@ -41,8 +41,8 @@ class MyStatelessWidget extends StatelessWidget {
                   child: Column(children: [
                     Image.asset(
                       "assets/images/frame_icon-01.png",
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.height * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: MediaQuery.of(context).size.height * 0.45,
                     ),
                     Container(
                       alignment: Alignment.center,
@@ -54,7 +54,7 @@ class MyStatelessWidget extends StatelessWidget {
                       child: Text(
                         "DINE IN",
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                            fontSize: MediaQuery.of(context).size.width * 0.029,
                             backgroundColor: Colors.red[900],
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
@@ -75,8 +75,8 @@ class MyStatelessWidget extends StatelessWidget {
                   child: Column(children: [
                     Image.asset(
                       "assets/images/frame_icon-02.png",
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.height * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: MediaQuery.of(context).size.height * 0.45,
                     ),
                     Container(
                       alignment: Alignment.center,
@@ -88,7 +88,7 @@ class MyStatelessWidget extends StatelessWidget {
                       child: Text(
                         "TAKE AWAY",
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.03,
+                            fontSize: MediaQuery.of(context).size.width * 0.029,
                             backgroundColor: Colors.red[900],
                             color: Colors.white,
                             fontWeight: FontWeight.bold),

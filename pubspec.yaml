@@ -32,8 +32,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/icon-01.png
-    - assets/images/icon-02.png
     - assets/images/frame_icon-01.png
     - assets/images/frame_icon-02.png
   fonts:
