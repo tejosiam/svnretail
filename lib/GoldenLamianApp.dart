@@ -31,72 +31,97 @@ class MyStatelessWidget extends StatelessWidget {
       body: Row(children: [
         Container(
           width: MediaQuery.of(context).size.width * 0.50,
-          color: Colors.grey[50],
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  child: Column(children: [
-                    Image.asset(
-                      "assets/images/frame_icon-01.png",
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.45,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width / 5,
-                      height: 35.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.red[900]),
-                      child: Text(
-                        "DINE IN",
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.029,
-                            backgroundColor: Colors.red[900],
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ]),
-                )
-              ]),
+          height: MediaQuery.of(context).size.height,
+          child: Material(
+            child: InkWell(
+                child: Ink(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey[50],
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          child: Column(children: [
+                            Image.asset(
+                              "assets/images/frame_icon-01.png",
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              height: MediaQuery.of(context).size.height * 0.45,
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width / 5,
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.red[900]),
+                              child: Text(
+                                "DINE IN",
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.029,
+                                    backgroundColor: Colors.red[900],
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )
+                          ]),
+                        )
+                      ]),
+                ),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => MenuScreen(),
+                    ))),
+          ),
         ),
         Container(
           width: MediaQuery.of(context).size.width * 0.50,
-          color: Colors.grey[50],
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: Column(children: [
-                    Image.asset(
-                      "assets/images/frame_icon-02.png",
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.45,
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width / 5,
-                      height: 35.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.red[900]),
-                      child: Text(
-                        "TAKE AWAY",
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.029,
-                            backgroundColor: Colors.red[900],
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    )
-                  ]),
-                )
-              ]),
+          height: MediaQuery.of(context).size.height,
+          child: Material(
+            child: InkWell(
+                child: Ink(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey[50],
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Column(children: [
+                            Image.asset(
+                              "assets/images/frame_icon-02.png",
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              height: MediaQuery.of(context).size.height * 0.45,
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width / 5,
+                              height: 35.0,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: Colors.red[900]),
+                              child: Text(
+                                "TAKE AWAY",
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.029,
+                                    backgroundColor: Colors.red[900],
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )
+                          ]),
+                        )
+                      ]),
+                ),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => MenuScreen(),
+                    ))),
+          ),
         ),
       ]),
     );
