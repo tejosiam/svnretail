@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goldenlamian/MenuBar/Src/CompanyName.dart';
 import 'package:goldenlamian/MenuBar/Src/NavBar.dart';
+import 'package:goldenlamian/MenuBar/Src/NavBarItem.dart';
 
 class CategoryBar extends StatefulWidget {
   @override
@@ -14,8 +15,8 @@ class _CategoryBarState extends State<CategoryBar> {
         alignment: Alignment.centerLeft,
         child: Container(
           height: MediaQuery.of(context).size.height,
-          width: 150.0,
-          color: Color(0xff333951),
+          width: 380.0,
+          color: Color(0xFF000000),
           child: Stack(
             children: [
               CompanyName(),
