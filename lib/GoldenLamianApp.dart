@@ -49,15 +49,22 @@ class MyStatelessWidget extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * 0.45,
                               height: MediaQuery.of(context).size.height * 0.45,
                             ),
-                            Container(
-                              alignment: Alignment.center,
-                              width: MediaQuery.of(context).size.width / 5,
-                              height: 35.0,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.red[900]),
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  side: BorderSide(color: Colors.red)),
+                              color: Colors.red[900],
+                              textColor: Colors.red,
+                              padding: EdgeInsets.only(left: 85.0, right: 85.0),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MenuScreen()),
+                                );
+                              },
                               child: Text(
-                                "DINE IN",
+                                "Dine In".toUpperCase(),
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width *
@@ -66,9 +73,9 @@ class MyStatelessWidget extends StatelessWidget {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                            )
+                            ),
                           ]),
-                        )
+                        ),
                       ]),
                 ),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
@@ -96,15 +103,22 @@ class MyStatelessWidget extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * 0.45,
                               height: MediaQuery.of(context).size.height * 0.45,
                             ),
-                            Container(
-                              alignment: Alignment.center,
-                              width: MediaQuery.of(context).size.width / 5,
-                              height: 35.0,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.red[900]),
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  side: BorderSide(color: Colors.red)),
+                              color: Colors.red[900],
+                              textColor: Colors.red,
+                              padding: EdgeInsets.only(left: 45.0, right: 45.0),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MenuScreen()),
+                                );
+                              },
                               child: Text(
-                                "TAKE AWAY",
+                                "Take Away".toUpperCase(),
                                 style: TextStyle(
                                     fontSize:
                                         MediaQuery.of(context).size.width *
@@ -113,7 +127,7 @@ class MyStatelessWidget extends StatelessWidget {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                            )
+                            ),
                           ]),
                         )
                       ]),

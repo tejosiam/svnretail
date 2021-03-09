@@ -21,6 +21,10 @@ dependencies:
   mvc_application: ^6.11.0+3
   material: ^1.0.0+1
   package_info: ^0.4.3+4
+  flutter_vector_icons: ^0.2.1
+  google_fonts: ^1.1.1
+  dio: ^3.0.10
+  flutter_layout_grid: ^0.11.6
 
 dev_dependencies:
   flutter_test:
@@ -32,9 +36,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/frame_icon-01.png
-    - assets/images/frame_icon-02.png
-  fonts:
+    - assets/images/
+    
+fonts:
   - family: Jelly
     fonts:
       - asset: assets/fonts/jellee.roman.ttf
