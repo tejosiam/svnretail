@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
         body: MyStatelessWidget(),
       ),
     );
@@ -28,20 +27,117 @@ class MyStatelessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          RaisedButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MenuScreen()),
-            ),
-            child: const Text('to MenuPage', style: TextStyle(fontSize: 20)),
+    return Scaffold(
+      body: Row(children: [
+        Container(
+          width: MediaQuery.of(context).size.width * 0.50,
+          height: MediaQuery.of(context).size.height,
+          child: Material(
+            child: InkWell(
+                child: Ink(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey[50],
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          child: Column(children: [
+                            Image.asset(
+                              "assets/images/frame_icon-01.png",
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              height: MediaQuery.of(context).size.height * 0.45,
+                            ),
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  side: BorderSide(color: Colors.red)),
+                              color: Colors.red[900],
+                              textColor: Colors.red,
+                              padding: EdgeInsets.only(left: 85.0, right: 85.0),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MenuScreen()),
+                                );
+                              },
+                              child: Text(
+                                "Dine In".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.029,
+                                    backgroundColor: Colors.red[900],
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ]),
+                ),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => MenuScreen(),
+                    ))),
           ),
-          const SizedBox(height: 30),
-        ],
-      ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.50,
+          height: MediaQuery.of(context).size.height,
+          child: Material(
+            child: InkWell(
+                child: Ink(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.grey[50],
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Column(children: [
+                            Image.asset(
+                              "assets/images/frame_icon-02.png",
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              height: MediaQuery.of(context).size.height * 0.45,
+                            ),
+                            RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  side: BorderSide(color: Colors.red)),
+                              color: Colors.red[900],
+                              textColor: Colors.red,
+                              padding: EdgeInsets.only(left: 45.0, right: 45.0),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MenuScreen()),
+                                );
+                              },
+                              child: Text(
+                                "Take Away".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.029,
+                                    backgroundColor: Colors.red[900],
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ]),
+                        )
+                      ]),
+                ),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => MenuScreen(),
+                    ))),
+          ),
+        ),
+      ]),
     );
   }
 }
