@@ -23,19 +23,21 @@ class DesktopLayout extends StatelessWidget {
       color: Colors.white,
       child: LayoutGrid(
         areas: '''
+          nav header
+          nav    content
           nav    content
         ''',
         // A number of extension methods are provided for concise track sizing
-        columnSizes: [
-          300.px,
-          1.fr,
-        ],
+        columnSizes: [300.px, 1.fr],
         rowSizes: [
+          150.px,
+          auto,
           1.fr,
         ],
         children: [
           Navigation().inGridArea('nav'),
           Content().inGridArea('content'),
+          Header().inGridArea('header'),
         ],
       ),
     );
@@ -45,63 +47,10 @@ class DesktopLayout extends StatelessWidget {
 class Navigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
-        color: Colors.purple,
-        child: ListView(
-          children: [
-            CompanyName(),
-            ElevatedButton(
-              child: Text('Best Seller'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.orange[300],
-                onPrimary: Colors.orange,
-                textStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontStyle: FontStyle.italic),
-              ),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/main');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Value Meals'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Lamian'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Hainan Rice'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Dimsum'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Drink & Deserts'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-          ],
-        ),
-      );
+      color: Colors.grey[400],
+      child: Container(
+        child: NavBar(),
+      ));
 }
 
 class Content extends StatelessWidget {
@@ -113,5 +62,13 @@ class Content extends StatelessWidget {
             MenuCard(),
           ],
         ),
+      );
+}
+
+class Header extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Container(
+        color: Colors.blue[400],
+        child: ListView(children: []),
       );
 }
