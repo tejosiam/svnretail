@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 
 class NavBarItem extends StatefulWidget {
-  final IconData icon;
+  final String teks;
   final Function touched;
   final bool active;
-  final String title;
+  final Image gambar;
 
-  NavBarItem({
-    this.icon,
-    this.touched,
-    this.active,
-    this.title,
-  });
+  NavBarItem({this.teks, this.touched, this.active, this.gambar});
   @override
   _NavBarItemState createState() => _NavBarItemState();
 }
@@ -22,49 +17,51 @@ class _NavBarItemState extends State<NavBarItem> {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {
-          print(widget.icon);
-          widget.touched();
-        },
-        splashColor: Colors.white,
-        hoverColor: Colors.white12,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 3.0),
-          child: Row(
-            children: [
-              Container(
-                height: 60.0,
-                width: 180.0,
-                child: Row(
+          onTap: () {
+            widget.touched();
+          },
+          splashColor: Colors.white,
+          hoverColor: Colors.white12,
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      child: widget.gambar,
+                    ),
+                    Padding(padding: EdgeInsets.only(left: 20.0)),
                     AnimatedContainer(
+                      margin: EdgeInsets.only(left: 15.0),
+                      alignment: Alignment.centerLeft,
                       duration: Duration(milliseconds: 475),
-                      height: 35.0,
-                      width: 100.0,
+                      height: 40.0,
+                      width: 170.0,
                       decoration: BoxDecoration(
                         color:
                             widget.active ? Colors.yellow : Colors.transparent,
                         borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10.0),
-                          bottomRight: Radius.circular(10.0),
-                        ),
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0),
+                            bottomLeft: Radius.circular(20.0)),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 30.0),
-                      child: Icon(
-                        widget.icon,
-                        color: widget.active ? Colors.white : Colors.white54,
-                        size: 19.0,
+                      padding: EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        widget.teks,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17.0),
                       ),
-                    ),
+                    )
                   ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+                )
+              ],
+            ),
+          )),
     );
   }
 }

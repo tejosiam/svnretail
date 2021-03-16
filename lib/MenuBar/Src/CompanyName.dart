@@ -9,9 +9,7 @@ class CompanyName extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/logo.png',
-            ),
+            Image.asset('assets/images/logo.png'),
           ],
         ),
       ),

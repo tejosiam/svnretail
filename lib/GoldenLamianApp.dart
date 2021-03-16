@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:goldenlamian/MenuScreen.dart';
+import 'package:material/material.dart';
 
 /// This is the main application widget.
 class MyApp extends StatelessWidget {
@@ -49,20 +50,13 @@ class MyStatelessWidget extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * 0.45,
                               height: MediaQuery.of(context).size.height * 0.45,
                             ),
-                            RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  side: BorderSide(color: Colors.red)),
-                              color: Colors.red[900],
-                              textColor: Colors.red,
-                              padding: EdgeInsets.only(left: 85.0, right: 85.0),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MenuScreen()),
-                                );
-                              },
+                            Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width / 4,
+                              height: MediaQuery.of(context).size.height / 17,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.red[900]),
                               child: Text(
                                 "Dine In".toUpperCase(),
                                 style: TextStyle(
@@ -103,20 +97,13 @@ class MyStatelessWidget extends StatelessWidget {
                               width: MediaQuery.of(context).size.width * 0.45,
                               height: MediaQuery.of(context).size.height * 0.45,
                             ),
-                            RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  side: BorderSide(color: Colors.red)),
-                              color: Colors.red[900],
-                              textColor: Colors.red,
-                              padding: EdgeInsets.only(left: 45.0, right: 45.0),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MenuScreen()),
-                                );
-                              },
+                            Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width / 4,
+                              height: MediaQuery.of(context).size.height / 17,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.red[900]),
                               child: Text(
                                 "Take Away".toUpperCase(),
                                 style: TextStyle(
