@@ -64,41 +64,7 @@ class Navigation extends StatelessWidget {
                 Navigator.pushNamed(context, '/main');
               },
             ),
-            ElevatedButton(
-              child: Text('Value Meals'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Lamian'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Hainan Rice'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Dimsum'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Drink & Deserts'),
-              onPressed: () {
-                // Navigate to the second screen using a named route.
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
+            NavBar(),
           ],
         ),
       );
