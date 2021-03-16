@@ -23,13 +23,12 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
       height: MediaQuery.of(context).size.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(padding: EdgeInsets.only(top: 50.0)),
+          Padding(padding: EdgeInsets.only(top: 20.0)),
           CompanyName(),
           Padding(
               padding: EdgeInsets.only(
@@ -47,6 +46,10 @@ class _NavBarState extends State<NavBar> {
               });
             },
           ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
           NavBarItem(
             gambar: Image.asset(
               "assets/images/icon-03.png",
@@ -59,10 +62,13 @@ class _NavBarState extends State<NavBar> {
               });
             },
           ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
           NavBarItem(
             gambar: Image.asset(
               "assets/images/icon-04.png",
-              height: 45.0,
             ),
             teks: 'Lamian',
             active: selected[2],
@@ -72,10 +78,13 @@ class _NavBarState extends State<NavBar> {
               });
             },
           ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
           NavBarItem(
             gambar: Image.asset(
               "assets/images/icon-05.png",
-              height: 45.0,
             ),
             teks: 'Hainan Rice',
             active: selected[3],
@@ -85,10 +94,13 @@ class _NavBarState extends State<NavBar> {
               });
             },
           ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
           NavBarItem(
             gambar: Image.asset(
               "assets/images/icon-06.png",
-              height: 45.0,
             ),
             teks: 'Dimsum',
             active: selected[4],
@@ -98,10 +110,13 @@ class _NavBarState extends State<NavBar> {
               });
             },
           ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
           NavBarItem(
             gambar: Image.asset(
               "assets/images/icon-07.png",
-              height: 45.0,
             ),
             teks: 'Drinks and Deserts',
             active: selected[5],

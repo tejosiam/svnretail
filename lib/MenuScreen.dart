@@ -47,7 +47,7 @@ class DesktopLayout extends StatelessWidget {
 class Navigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
-      color: Colors.grey[400],
+      color: Colors.grey[300],
       child: Container(
         child: NavBar(),
       ));
@@ -68,7 +68,7 @@ class Content extends StatelessWidget {
 class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
-        color: Colors.blue[400],
+        color: Colors.blue[300],
         child: ListView(children: []),
       );
 }

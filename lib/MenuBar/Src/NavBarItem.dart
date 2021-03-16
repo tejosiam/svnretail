@@ -36,7 +36,8 @@ class _NavBarItemState extends State<NavBarItem> {
                     ),
                     Padding(padding: EdgeInsets.only(left: 20.0)),
                     AnimatedContainer(
-                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(left: 15.0),
+                      alignment: Alignment.centerLeft,
                       duration: Duration(milliseconds: 475),
                       height: 40.0,
                       width: 170.0,
@@ -49,6 +50,7 @@ class _NavBarItemState extends State<NavBarItem> {
                             bottomRight: Radius.circular(20.0),
                             bottomLeft: Radius.circular(20.0)),
                       ),
+                      padding: EdgeInsets.only(left: 10.0),
                       child: Text(
                         widget.teks,
                         style: TextStyle(
