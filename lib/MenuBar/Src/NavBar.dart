@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:goldenlamian/MenuBar/Src/CompanyName.dart';
 import 'package:goldenlamian/MenuBar/Src/NavBarItem.dart';
 
 class NavBar extends StatefulWidget {
@@ -29,7 +27,17 @@ class _NavBarState extends State<NavBar> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(padding: EdgeInsets.only(top: 20.0)),
-          CompanyName(),
+          Container(
+            height: 50.0,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/logo.png'),
+                ],
+              ),
+            ),
+          ),
           Padding(
               padding: EdgeInsets.only(
             top: 80.0,

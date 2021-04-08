@@ -1,15 +1,20 @@
-class Post {
+class MenuModel {
   String status;
   String message;
   List<Data> data;
+  String error;
 
-  Post({this.status, this.message, this.data});
+  MenuModel({this.status, this.message, this.data});
 
-  Post.fromJson(Map<String, dynamic> json) {
+  MenuModel.withError(String errorMessage) {
+    error = errorMessage;
+  }
+
+  MenuModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = new List<Data>();
+      data = <Data>[];
       json['data'].forEach((v) {
         data.add(new Data.fromJson(v));
       });

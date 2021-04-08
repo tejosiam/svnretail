@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:goldenlamian/MenuBar/Src/CompanyName.dart';
 import 'package:goldenlamian/MenuBar/Src/NavBar.dart';
-import 'package:goldenlamian/Dashboard/src/MenuCard.dart';
+import 'package:goldenlamian/pages/menu_page.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -36,8 +35,8 @@ class DesktopLayout extends StatelessWidget {
         ],
         children: [
           Navigation().inGridArea('nav'),
-          Content().inGridArea('content'),
           Header().inGridArea('header'),
+          Content().inGridArea('content'),
         ],
       ),
     );
@@ -47,7 +46,7 @@ class DesktopLayout extends StatelessWidget {
 class Navigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
-      color: Colors.grey[300],
+      color: Colors.white,
       child: Container(
         child: NavBar(),
       ));
@@ -57,10 +56,8 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         color: Colors.white,
-        child: ListView(
-          children: <Widget>[
-            MenuCard(),
-          ],
+        child: Container(
+          child: MenuPage(),
         ),
       );
 }

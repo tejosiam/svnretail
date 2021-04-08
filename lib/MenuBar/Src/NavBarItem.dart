@@ -40,21 +40,25 @@ class _NavBarItemState extends State<NavBarItem> {
                       alignment: Alignment.centerLeft,
                       duration: Duration(milliseconds: 475),
                       height: 40.0,
-                      width: 170.0,
+                      width: 180.0,
                       decoration: BoxDecoration(
-                        color:
-                            widget.active ? Colors.yellow : Colors.transparent,
+                        color: widget.active
+                            ? Colors.orange[200]
+                            : Colors.transparent,
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20.0),
-                            topRight: Radius.circular(20.0),
-                            bottomRight: Radius.circular(20.0),
-                            bottomLeft: Radius.circular(20.0)),
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
+                          bottomLeft: Radius.circular(20.0),
+                        ),
                       ),
                       padding: EdgeInsets.only(left: 10.0),
                       child: Text(
                         widget.teks,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17.0),
+                            color: Colors.orange[700],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0),
                       ),
                     )
                   ],

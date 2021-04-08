@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:goldenlamian/MenuScreen.dart';
-import 'package:material/material.dart';
+import 'package:goldenlamian/pages/menu_page.dart';
 
 /// This is the main application widget.
 class MyApp extends StatelessWidget {
@@ -17,6 +17,32 @@ class MyApp extends StatelessWidget {
       title: _title,
       home: Scaffold(
         body: MyStatelessWidget(),
+        endDrawer: Drawer(
+          child: SafeArea(
+            right: false,
+            child: Center(
+              child: Text('Drawer content'),
+            ),
+          ),
+        ),
+        bottomNavigationBar: Builder(
+          builder: (BuildContext context) {
+            return BottomAppBar(
+              color: Colors.orange,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  IconButton(
+                      icon: Icon(Icons.menu),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      }),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -120,7 +146,7 @@ class MyStatelessWidget extends StatelessWidget {
                       ]),
                 ),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => MenuScreen(),
+                      builder: (BuildContext context) => MenuPage(),
                     ))),
           ),
         ),
