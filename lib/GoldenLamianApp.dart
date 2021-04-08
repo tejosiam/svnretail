@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:goldenlamian/MenuScreen.dart';
 import 'package:goldenlamian/pages/menu_page.dart';
+import 'package:goldenlamian/Payment/ListPaymentPage.dart';
 
 /// This is the main application widget.
 class MyApp extends StatelessWidget {
@@ -34,10 +35,13 @@ class MyApp extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   IconButton(
-                      icon: Icon(Icons.menu),
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      }),
+                    icon: Icon(Icons.menu),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => ListPayment(),
+                      ),
+                    ),
+                  )
                 ],
               ),
             );
