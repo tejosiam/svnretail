@@ -11,10 +11,7 @@ class _ListPaymentState extends State<ListPayment> {
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        height: 1000,
-        width: 1280.0,
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
