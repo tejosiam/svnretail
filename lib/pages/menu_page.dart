@@ -70,6 +70,7 @@ class _MenuPageState extends State<MenuPage> {
       itemBuilder: (context, index) {
         return Container(
           child: Card(
+              child: InkWell(
             child: Container(
               margin: EdgeInsets.all(8.0),
               child: Column(
@@ -94,13 +95,11 @@ class _MenuPageState extends State<MenuPage> {
                         color: Colors.orange,
                         fontSize: 20.0,
                       )),
-                  IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () => Scaffold.of(context).openEndDrawer()),
                 ],
               ),
             ),
-          ),
+            onTap: () => Scaffold.of(context).openEndDrawer(),
+          )),
         );
       },
     );
