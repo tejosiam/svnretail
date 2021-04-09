@@ -96,7 +96,7 @@ class _MenuPageState extends State<MenuPage> {
                       )),
                   IconButton(
                       icon: Icon(Icons.settings),
-                      onPressed: () => Scaffold.of(context).openDrawer()),
+                      onPressed: () => Scaffold.of(context).openEndDrawer()),
                 ],
               ),
             ),
