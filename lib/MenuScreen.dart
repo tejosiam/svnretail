@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:goldenlamian/MenuBar/Src/NavBar.dart';
 import 'package:goldenlamian/pages/menu_page.dart';
+import 'package:goldenlamian/pages/payment_page.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -27,8 +28,48 @@ class MenuScreen extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     ListTile(
-                      title: Text("Best Seller"),
-                    )
+                      title: Text(
+                        "Best Sellers",
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                      trailing: IconButton(
+                          icon: Icon(Icons.info),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ListPayment()),
+                            );
+                          }),
+                    ),
+                    Container(
+                        height: 300.0,
+                        width: 300.0,
+                        child: DrawerHeader(
+                            padding: EdgeInsets.zero,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: ExactAssetImage(
+                                          "assets/images/menu-lamian-extraspicybeef.png"))),
+                            ))),
+                    Text(
+                      "Lamian Extra Spicy Beef",
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                    Text(
+                      "Rp. 49.090",
+                      style: TextStyle(color: Colors.orange, fontSize: 20.0),
+                    ),
+                    Container(
+                      height: 120.0,
+                      color: Colors.pink,
+                    ),
+                    Container(
+                      height: 120.0,
+                      color: Colors.yellow,
+                    ),
                     //drawer stuffs
                   ],
                 ),
