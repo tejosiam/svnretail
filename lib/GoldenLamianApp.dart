@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:goldenlamian/MenuScreen.dart';
-import 'package:goldenlamian/pages/menu_page.dart';
 import 'package:goldenlamian/pages/payment_page.dart';
 
 /// This is the main application widget.

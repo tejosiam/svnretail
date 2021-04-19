@@ -25,6 +25,8 @@ dependencies:
   google_fonts: ^1.1.1
   flutter_layout_grid: ^0.11.6
   search_page: ^1.4.0+1
+  radio_grouped_buttons: 1.0.0+2
+  grouped_buttons: ^1.0.4
 
   #Networking
   dio: ^3.0.10
