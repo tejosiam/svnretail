@@ -39,8 +39,8 @@ class Data {
   String sku;
   String nama;
   String detail;
-  String price;
-  String normalPrice;
+  double price;
+  double normalPrice;
   String status;
   String img;
   String customizable;
@@ -67,8 +67,8 @@ class Data {
     sku = json['sku'];
     nama = json['nama'];
     detail = json['detail'];
-    price = json['price'];
-    normalPrice = json['normal_price'];
+    price = double.tryParse(json['price'] ?? "0.0");
+    normalPrice = double.tryParse(json['normal_price'] ?? "0.0");
     status = json['status'];
     img = json['img'];
     customizable = json['customizable'];
@@ -88,8 +88,8 @@ class Data {
     data['sku'] = this.sku;
     data['nama'] = this.nama;
     data['detail'] = this.detail;
-    data['price'] = this.price;
-    data['normal_price'] = this.normalPrice;
+    data['price'] = (this.price ?? 0.0).toString();
+    data['normal_price'] = (this.normalPrice ?? 0.0).toString();
     data['status'] = this.status;
     data['img'] = this.img;
     data['customizable'] = this.customizable;

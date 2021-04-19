@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:goldenlamian/MenuScreen.dart';
-import 'package:goldenlamian/pages/payment_page.dart';
-
 /// This is the main application widget.
-class MyApp extends StatelessWidget {
   static const String _title = 'Home Page';
 
   @override
@@ -73,7 +69,7 @@ class MyStatelessWidget extends StatelessWidget {
                       ]),
                 ),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => MenuScreen(),
+                      builder: (BuildContext context) => MenuPage(),
                     ))),
           ),
         ),

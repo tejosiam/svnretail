@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:goldenlamian/bloc/menu_bloc.dart';
 import 'package:goldenlamian/models/menu_model.dart';
+import 'package:goldenlamian/pages/payment_page.dart';
+import 'package:goldenlamian/view/BigSmallPrice.dart';
+import 'package:goldenlamian/view/Counter.dart';
+import 'package:goldenlamian/view/NavBarItem.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class MenuPage extends StatefulWidget {
   @override
@@ -10,11 +17,34 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
   final MenuBloc _menuBloc = MenuBloc();
+  final ItemScrollController itemScrollController = ItemScrollController();
+  final ItemPositionsListener itemPositionsListener =
+      ItemPositionsListener.create();
 
   @override
   void initState() {
     _menuBloc.add(GetMenuList());
     super.initState();
+  }
+
+  List<String> listHeader = [
+    'Best Seller',
+    'Value Meals',
+    'Lamian',
+    'Hainan Rice',
+    'Dimsum',
+    'Drink and Dessert',
+  ];
+
+  List<bool> selected = [true, false, false, false, false, false];
+  void select(int n) {
+    for (int i = 0; i <= 5; i++) {
+      if (i != n) {
+        selected[i] = false;
+      } else {
+        selected[i] = true;
+      }
+    }
   }
 
   @override
@@ -51,7 +81,7 @@ class _MenuPageState extends State<MenuPage> {
               } else if (state is MenuLoading) {
                 return _buildLoading();
               } else if (state is MenuLoaded) {
-                return _buildCard(context, state.menuModel);
+                return _menuContainer(context, state.menuModel);
               } else if (state is MenuError) {
                 return Container();
               }
@@ -62,44 +92,332 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget _buildCard(BuildContext context, MenuModel model) {
-    return GridView.builder(
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: model.data.length,
-      itemBuilder: (context, index) {
-        return Container(
-          child: Card(
-              child: InkWell(
-            child: Container(
-              margin: EdgeInsets.all(8.0),
+  Widget _menuContainer(BuildContext context, MenuModel model) {
+    return MaterialApp(
+      home: Scaffold(
+        body: LayoutGrid(
+          areas: '''
+          nav    content
+          nav    content
+        ''',
+          // A number of extension methods are provided for concise track sizing
+          columnSizes: [300.px, 1.fr],
+          rowSizes: [
+            auto,
+            1.fr,
+          ],
+          children: [
+            _navigation(context).inGridArea('nav'),
+            _buildCard(context, model).inGridArea('content'),
+          ],
+        ),
+        endDrawer: Padding(
+          padding: const EdgeInsets.only(
+            top: 3,
+            bottom: 3,
+          ),
+          child: ClipRRect(
+            // give it your desired border radius
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            ),
+            // wrap with a sizedbox for a custom width [for more flexibility]
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              child: _drawerItem(context),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _drawerItem(BuildContext context) {
+    return Drawer(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          ListTile(
+            dense: true,
+            title: Text(
+              "Best Sellers",
+              style: TextStyle(fontSize: 20.0),
+            ),
+            trailing: IconButton(
+                icon: Icon(Icons.info),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ListPayment()));
+                }),
+          ),
+          Container(
+              color: Colors.red,
+              height: 250.0,
+              width: 250.0,
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover, image: ExactAssetImage("#"))),
+              )),
+          Text(
+            "Lamian Extra Spicy Beef",
+            style: TextStyle(fontSize: 15.0),
+          ),
+          Text(
+            "Rp. 49.090",
+            style: TextStyle(color: Colors.orange, fontSize: 20.0),
+          ),
+          Material(
               child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 300.0,
-                    width: 300.0,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://api1.goldenlamian.com/${model.data[index].img}"),
-                            fit: BoxFit.cover)),
-                  ),
-                  Text("Categori: ${model.data[index].namaCategory}",
-                      style: TextStyle(
-                          color: Color(0xFF233467),
-                          fontSize: 15,
-                          fontFamily: 'Montserrat')),
-                  Text("${model.data[index].nama}"),
-                  Text("RP ${model.data[index].price}",
-                      style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 20.0,
-                      )),
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+              ),
+            ],
+          )),
+          Counter(),
+          Expanded(
+              child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: InkWell(
+                      child: Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          color: Colors.yellow[800],
+                          child: Center(
+                            child: Text("Add to Order",
+                                style: TextStyle(
+                                  color: Colors.red[800],
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          )),
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                            builder: (BuildContext context) => ListPayment(),
+                          )))
+                  //drawer stuffs
+                  ))
+        ],
+      ),
+    );
+  }
+
+  Widget _navigation(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(padding: EdgeInsets.only(top: 20.0)),
+          Container(
+            height: 50.0,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/logo.png'),
                 ],
               ),
             ),
-            onTap: () => Scaffold.of(context).openEndDrawer(),
+          ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 80.0,
           )),
+          NavBarItem(
+            teks: 'Best Sellers',
+            namaCategory: 'Best Seller',
+            gambar: Image.asset(
+              "assets/images/icon-02.png",
+            ),
+            active: selected[0],
+            touched: () {
+              setState(() {
+                select(0);
+                itemScrollController.jumpTo(index: 0);
+              });
+            },
+          ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
+          NavBarItem(
+            gambar: Image.asset(
+              "assets/images/icon-03.png",
+            ),
+            teks: 'Value Meals',
+            namaCategory: 'Best Seller',
+            active: selected[1],
+            touched: () {
+              setState(() {
+                select(1);
+                itemScrollController.jumpTo(index: 1);
+              });
+            },
+          ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
+          NavBarItem(
+            gambar: Image.asset(
+              "assets/images/icon-04.png",
+            ),
+            teks: 'Lamian',
+            namaCategory: 'Best Seller',
+            active: selected[2],
+            touched: () {
+              setState(() {
+                select(2);
+                itemScrollController.jumpTo(index: 2);
+              });
+            },
+          ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
+          NavBarItem(
+            gambar: Image.asset(
+              "assets/images/icon-05.png",
+            ),
+            teks: 'Hainan Rice',
+            namaCategory: 'Best Seller',
+            active: selected[3],
+            touched: () {
+              setState(() {
+                select(3);
+                itemScrollController.jumpTo(index: 3);
+              });
+            },
+          ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
+          NavBarItem(
+            gambar: Image.asset(
+              "assets/images/icon-06.png",
+            ),
+            teks: 'Dimsum',
+            namaCategory: 'Best Seller',
+            active: selected[4],
+            touched: () {
+              setState(() {
+                select(4);
+                itemScrollController.jumpTo(index: 4);
+              });
+            },
+          ),
+          Padding(
+              padding: EdgeInsets.only(
+            top: 5.0,
+          )),
+          NavBarItem(
+            gambar: Image.asset(
+              "assets/images/icon-07.png",
+            ),
+            teks: 'Drinks and Deserts',
+            namaCategory: 'Best Seller',
+            active: selected[5],
+            touched: () {
+              setState(() {
+                select(5);
+                itemScrollController.jumpTo(index: 5);
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCard(BuildContext context, MenuModel model) {
+    List<Data> _menuList = model.data;
+
+    return ScrollablePositionedList.builder(
+      itemScrollController: itemScrollController,
+      itemPositionsListener: itemPositionsListener,
+      itemCount: listHeader.length,
+      itemBuilder: (context, index) {
+        // Menu di sortir berdasarkan kategory
+        var menuByCategory = _menuList
+            .where((b) => b.namaCategory == listHeader[index])
+            .toList();
+
+        List<Data> _menuByCategory = menuByCategory;
+        return StickyHeader(
+          header: Container(
+            height: 38.0,
+            color: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              listHeader[index],
+              style: const TextStyle(
+                  color: Colors.orangeAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          content: Container(
+            color: Colors.white,
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _menuByCategory.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.2,
+              ),
+              itemBuilder: (contxt, indx) {
+                return Card(
+                  elevation: 0.0, // remove card shadow
+                  child: InkWell(
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            height: 300.0,
+                            width: 300.0,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://api1.goldenlamian.com/${_menuByCategory[indx].img}"),
+                                  fit: BoxFit.cover),
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                          ),
+                          Text("${_menuByCategory[indx].nama}",
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width / 80,
+                                  fontWeight: FontWeight.bold)),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: BigSmallPrice(
+                                    price: _menuByCategory[indx].price),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    onTap: () => Scaffold.of(context).openEndDrawer(),
+                  ),
+                );
+              },
+            ),
+          ),
         );
       },
     );
