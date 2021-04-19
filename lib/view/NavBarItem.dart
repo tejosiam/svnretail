@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class NavBarItem extends StatefulWidget {
   final String teks;
+  final String namaCategory;
   final Function touched;
   final bool active;
   final Image gambar;
 
-  NavBarItem({this.teks, this.touched, this.active, this.gambar});
+  NavBarItem(
+      {this.teks, this.touched, this.active, this.gambar, this.namaCategory});
   @override
   _NavBarItemState createState() => _NavBarItemState();
 }
 
 class _NavBarItemState extends State<NavBarItem> {
+  final ItemScrollController itemScrollController = ItemScrollController();
   @override
   Widget build(BuildContext context) {
     return Material(

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goldenlamian/MenuScreen.dart';
-import 'package:mvc_application/view.dart';
 
 class ListPayment extends StatefulWidget {
   _ListPaymentState createState() => _ListPaymentState();
@@ -31,9 +29,6 @@ class _ListPaymentState extends State<ListPayment> {
               fontColors: Colors.black,
               sizeTeks: 30.0,
               borderColors: Colors.transparent,
-              nextPage: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MenuScreen(),
-              )),
             ),
             Padding(padding: EdgeInsets.only(top: 25.0)),
             ListPaymentItems(
@@ -43,9 +38,6 @@ class _ListPaymentState extends State<ListPayment> {
               fontColors: Colors.black,
               sizeTeks: 30.0,
               borderColors: Colors.transparent,
-              nextPage: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MenuScreen(),
-              )),
             ),
             Padding(padding: EdgeInsets.only(top: 25.0)),
             ListPaymentItems(
@@ -55,9 +47,6 @@ class _ListPaymentState extends State<ListPayment> {
               fontColors: Colors.black,
               sizeTeks: 30.0,
               borderColors: Colors.transparent,
-              nextPage: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MenuScreen(),
-              )),
             ),
             Padding(padding: EdgeInsets.only(top: 150.0)),
             ListPaymentItems(
@@ -67,9 +56,6 @@ class _ListPaymentState extends State<ListPayment> {
               fontColors: Colors.black,
               sizeTeks: 23.0,
               borderColors: Colors.black,
-              nextPage: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => MenuScreen(),
-              )),
             ),
           ],
         ));

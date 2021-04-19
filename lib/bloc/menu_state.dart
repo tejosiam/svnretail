@@ -21,6 +21,7 @@ class MenuLoading extends MenuState {
 
 class MenuLoaded extends MenuState {
   final MenuModel menuModel;
+
   const MenuLoaded(this.menuModel);
   @override
   List<Object> get props => [menuModel];
