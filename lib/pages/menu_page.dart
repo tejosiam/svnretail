@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
@@ -20,6 +21,9 @@ class _MenuPageState extends State<MenuPage> {
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
+
+  String _sku = "asdas";
+  String _namaMenu = "Value 4";
 
   @override
   void initState() {
@@ -125,7 +129,7 @@ class _MenuPageState extends State<MenuPage> {
             // wrap with a sizedbox for a custom width [for more flexibility]
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.4,
-              child: _drawerItem(context),
+              child: _drawerItem(context, _sku, _namaMenu),
             ),
           ),
         ),
@@ -133,7 +137,7 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget _drawerItem(BuildContext context) {
+  Widget _drawerItem(BuildContext context, _sku, _namaMenu) {
     return Drawer(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -141,7 +145,7 @@ class _MenuPageState extends State<MenuPage> {
           ListTile(
             dense: true,
             title: Text(
-              "Best Sellers",
+              _sku,
               style: TextStyle(fontSize: 20.0),
             ),
             trailing: IconButton(
@@ -161,7 +165,7 @@ class _MenuPageState extends State<MenuPage> {
                         fit: BoxFit.cover, image: ExactAssetImage("#"))),
               )),
           Text(
-            "Lamian Extra Spicy Beef",
+            _namaMenu,
             style: TextStyle(fontSize: 15.0),
           ),
           Text(
@@ -382,18 +386,28 @@ class _MenuPageState extends State<MenuPage> {
                       child: Column(
                         children: <Widget>[
                           Container(
-                            height: 300.0,
-                            width: 300.0,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://api1.goldenlamian.com/${_menuByCategory[indx].img}"),
-                                  fit: BoxFit.cover),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 1,
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  "https://api1.goldenlamian.com/${_menuByCategory[indx].img}",
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                height: 300.0,
+                                width: 300.0,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                              borderRadius: BorderRadius.circular(40),
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      CircularProgressIndicator(
+                                          value: downloadProgress.progress),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
                           ),
                           Text("${_menuByCategory[indx].nama}",
@@ -412,7 +426,12 @@ class _MenuPageState extends State<MenuPage> {
                         ],
                       ),
                     ),
-                    onTap: () => Scaffold.of(context).openEndDrawer(),
+                    // onTap: () => Scaffold.of(context).openEndDrawer(),
+                    onTap: () => setState(() {
+                      Scaffold.of(context).openEndDrawer();
+                      _sku = _menuByCategory[indx].sku;
+                      _namaMenu = _menuByCategory[indx].nama;
+                    }),
                   ),
                 );
               },
