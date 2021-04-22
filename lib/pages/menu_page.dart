@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:goldenlamian/bloc/menu_bloc.dart';
@@ -25,8 +22,10 @@ class _MenuPageState extends State<MenuPage> {
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
 
+  String _sku = "asdas";
   String _namaCategory = "Best Seller";
   String _namaMenu = "Value 4";
+  String _detailMenu = "Value 4";
   String _gambar = "#";
   double _harga = 0;
 
@@ -135,7 +134,12 @@ class _MenuPageState extends State<MenuPage> {
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.4,
               child: _drawerItem(
-                  context, _namaCategory, _namaMenu, _gambar, _harga),
+                  sku: _sku,
+                  namaCategory: _namaCategory,
+                  namaMenu: _namaMenu,
+                  detailMenu: _detailMenu,
+                  gambar: _gambar,
+                  harga: _harga),
             ),
           ),
         ),
@@ -144,15 +148,19 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   Widget _drawerItem(
-      BuildContext context, _namaCategory, _namaMenu, _gambar, _harga) {
+      {String sku,
+      String namaCategory,
+      String namaMenu,
+      String detailMenu,
+      String gambar,
+      double harga}) {
     return Drawer(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            dense: true,
             title: Text(
-              _namaCategory,
+              namaCategory,
               style: const TextStyle(
                   color: Colors.orangeAccent,
                   fontSize: 20,
@@ -167,7 +175,7 @@ class _MenuPageState extends State<MenuPage> {
           ),
           Container(
             child: CachedNetworkImage(
-              imageUrl: "https://api1.goldenlamian.com/${_gambar}",
+              imageUrl: "https://api1.goldenlamian.com/$gambar",
               imageBuilder: (context, imageProvider) => Container(
                 height: 300.0,
                 width: 300.0,
@@ -185,11 +193,16 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
           Padding(padding: EdgeInsets.only(top: 15)),
-          Text("${_namaMenu}",
+          Text("$namaMenu",
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width / 70,
+                  fontSize: MediaQuery.of(context).size.width / 60,
                   fontWeight: FontWeight.bold)),
-          Padding(padding: EdgeInsets.only(top: 5)),
+          Padding(padding: EdgeInsets.only(top: 10)),
+          Text("$detailMenu",
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 100,
+                  fontWeight: FontWeight.normal)),
+          Padding(padding: EdgeInsets.only(top: 20)),
           Row(
             children: <Widget>[
               Expanded(
@@ -459,8 +472,10 @@ class _MenuPageState extends State<MenuPage> {
                     // onTap: () => Scaffold.of(context).openEndDrawer(),
                     onTap: () => setState(() {
                       Scaffold.of(context).openEndDrawer();
+                      _sku = _menuByCategory[indx].sku;
                       _namaCategory = _menuByCategory[indx].namaCategory;
                       _namaMenu = _menuByCategory[indx].nama;
+                      _detailMenu = _menuByCategory[indx].detail;
                       _gambar = _menuByCategory[indx].img;
                       _harga = _menuByCategory[indx].price;
                     }),
