@@ -129,7 +129,7 @@ class _MenuPageState extends State<MenuPage> {
             // wrap with a sizedbox for a custom width [for more flexibility]
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.4,
-              child: _drawerItem(context, _sku, _namaMenu),
+              child: _drawerItem(sku: _sku, namaMenu: _namaMenu),
             ),
           ),
         ),
@@ -137,7 +137,7 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget _drawerItem(BuildContext context, _sku, _namaMenu) {
+  Widget _drawerItem({String sku, String namaMenu}) {
     return Drawer(
       child: Column(
         mainAxisSize: MainAxisSize.max,
