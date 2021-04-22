@@ -23,7 +23,11 @@ class _MenuPageState extends State<MenuPage> {
       ItemPositionsListener.create();
 
   String _sku = "asdas";
+  String _namaCategory = "Best Seller";
   String _namaMenu = "Value 4";
+  String _detailMenu = "Value 4";
+  String _gambar = "#";
+  double _harga = 0;
 
   @override
   void initState() {
@@ -129,7 +133,13 @@ class _MenuPageState extends State<MenuPage> {
             // wrap with a sizedbox for a custom width [for more flexibility]
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.4,
-              child: _drawerItem(sku: _sku, namaMenu: _namaMenu),
+              child: _drawerItem(
+                  sku: _sku,
+                  namaCategory: _namaCategory,
+                  namaMenu: _namaMenu,
+                  detailMenu: _detailMenu,
+                  gambar: _gambar,
+                  harga: _harga),
             ),
           ),
         ),
@@ -137,16 +147,24 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 
-  Widget _drawerItem({String sku, String namaMenu}) {
+  Widget _drawerItem(
+      {String sku,
+      String namaCategory,
+      String namaMenu,
+      String detailMenu,
+      String gambar,
+      double harga}) {
     return Drawer(
       child: Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            dense: true,
             title: Text(
-              _sku,
-              style: TextStyle(fontSize: 20.0),
+              namaCategory,
+              style: const TextStyle(
+                  color: Colors.orangeAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
             trailing: IconButton(
                 icon: Icon(Icons.info),
@@ -156,21 +174,41 @@ class _MenuPageState extends State<MenuPage> {
                 }),
           ),
           Container(
-              color: Colors.red,
-              height: 250.0,
-              width: 250.0,
-              child: Container(
+            child: CachedNetworkImage(
+              imageUrl: "https://api1.goldenlamian.com/$gambar",
+              imageBuilder: (context, imageProvider) => Container(
+                height: 300.0,
+                width: 300.0,
                 decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover, image: ExactAssetImage("#"))),
-              )),
-          Text(
-            _namaMenu,
-            style: TextStyle(fontSize: 15.0),
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
           ),
-          Text(
-            "Rp. 49.090",
-            style: TextStyle(color: Colors.orange, fontSize: 20.0),
+          Padding(padding: EdgeInsets.only(top: 15)),
+          Text("$namaMenu",
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 60,
+                  fontWeight: FontWeight.bold)),
+          Padding(padding: EdgeInsets.only(top: 10)),
+          Text("$detailMenu",
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 100,
+                  fontWeight: FontWeight.normal)),
+          Padding(padding: EdgeInsets.only(top: 20)),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: BigSmallPrice(price: _harga),
+              ),
+            ],
           ),
           Material(
               child: Column(
@@ -180,28 +218,33 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ],
           )),
-          Counter(),
           Expanded(
               child: Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: InkWell(
-                      child: Container(
-                          height: 50,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.yellow[800],
-                          child: Center(
-                            child: Text("Add to Order",
-                                style: TextStyle(
-                                  color: Colors.red[800],
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                          )),
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                            builder: (BuildContext context) => ListPayment(),
-                          )))
-                  //drawer stuffs
-                  ))
+            alignment: FractionalOffset.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Counter(),
+                Padding(padding: EdgeInsets.only(top: 15)),
+                InkWell(
+                    child: Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.yellow[800],
+                        child: Center(
+                          child: Text("Add to Order",
+                              style: TextStyle(
+                                color: Colors.red[800],
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => ListPayment(),
+                        )))
+              ],
+            ),
+          ))
         ],
       ),
     );
@@ -430,7 +473,11 @@ class _MenuPageState extends State<MenuPage> {
                     onTap: () => setState(() {
                       Scaffold.of(context).openEndDrawer();
                       _sku = _menuByCategory[indx].sku;
+                      _namaCategory = _menuByCategory[indx].namaCategory;
                       _namaMenu = _menuByCategory[indx].nama;
+                      _detailMenu = _menuByCategory[indx].detail;
+                      _gambar = _menuByCategory[indx].img;
+                      _harga = _menuByCategory[indx].price;
                     }),
                   ),
                 );
