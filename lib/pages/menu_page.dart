@@ -147,6 +147,7 @@ class _MenuPageState extends State<MenuPage> {
       BuildContext context, _namaCategory, _namaMenu, _gambar, _harga) {
     return Drawer(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
             dense: true,
@@ -165,32 +166,30 @@ class _MenuPageState extends State<MenuPage> {
                 }),
           ),
           Container(
-              height: 300.0,
-              width: 300.0,
-              child: Container(
-                child: CachedNetworkImage(
-                  imageUrl: "https://api1.goldenlamian.com/${_gambar}",
-                  imageBuilder: (context, imageProvider) => Container(
-                    height: 250.0,
-                    width: 250.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+            child: CachedNetworkImage(
+              imageUrl: "https://api1.goldenlamian.com/${_gambar}",
+              imageBuilder: (context, imageProvider) => Container(
+                height: 300.0,
+                width: 300.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
                   ),
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      CircularProgressIndicator(
-                          value: downloadProgress.progress),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
-              )),
-          Text(_namaMenu,
+              ),
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(top: 15)),
+          Text("${_namaMenu}",
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width,
+                  fontSize: MediaQuery.of(context).size.width / 70,
                   fontWeight: FontWeight.bold)),
+          Padding(padding: EdgeInsets.only(top: 5)),
           Row(
             children: <Widget>[
               Expanded(
@@ -198,6 +197,41 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ],
           ),
+          Material(
+              child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 15.0),
+              ),
+            ],
+          )),
+          Expanded(
+              child: Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Counter(),
+                Padding(padding: EdgeInsets.only(top: 15)),
+                InkWell(
+                    child: Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.yellow[800],
+                        child: Center(
+                          child: Text("Add to Order",
+                              style: TextStyle(
+                                color: Colors.red[800],
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => ListPayment(),
+                        )))
+              ],
+            ),
+          ))
         ],
       ),
     );
